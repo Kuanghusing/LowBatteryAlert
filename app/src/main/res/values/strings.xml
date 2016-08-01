@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">没电了！</string>
+    <string name="warn">剩余%s秒关机</string>
+    <string name="dialog_title">说个鬼故事 Σ(;ﾟдﾟ)</string>
+    <string name="btn_cancel">取消</string>
+
+    <!--Setting -->
+    <string name="switch_open_close">开关</string>
+    <string name="battery_level">触发电量</string>
+    <string name="auto_disconnect">自动断开网络</string>
+    <string name="battery_level_summary">当达到相应电量打开对话框 效果看下面测试</string>
+    <string name="auto_disconnect_summary">到达触发电量时自动断开数据网络或WiFi(5.0以上系统因系统只支持断开WiFi)</string>
+    <string name="test">测试</string>
+    <string name="test_summary">测试一下效果</string>
+    <string name="more">More</string>
+    <string name="about">关于</string>
+    <string name="test_fail">呃……作者没有适配好你的机型，发生错误了，联系作者修复错误</string>
+</resources>

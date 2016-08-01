@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/app_name">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_group_work_black_24dp"
+            android:key="@string/switch_open_close"
+            android:title="@string/switch_open_close" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_network_wifi_black_24dp"
+            android:key="@string/auto_disconnect"
+            android:summary="@string/auto_disconnect_summary"
+            android:title="@string/auto_disconnect" />
+
+
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/level_entries"
+            android:entryValues="@array/level_entries_values"
+            android:icon="@drawable/ic_battery_alert_black_24dp"
+            android:key="@string/battery_level"
+            android:summary="@string/battery_level_summary"
+            android:title="@string/battery_level" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/more">
+
+        <Preference
+            android:icon="@drawable/ic_extension_black_24dp"
+            android:key="@string/test"
+            android:summary="@string/test_summary"
+            android:title="@string/test" />
+
+        <Preference
+            android:icon="@drawable/ic_extension_black_24dp"
+            android:key="@string/about"
+            android:title="@string/about" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
