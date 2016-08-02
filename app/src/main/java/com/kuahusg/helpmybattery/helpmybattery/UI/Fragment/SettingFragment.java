@@ -5,7 +5,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
 
 import com.kuahusg.helpmybattery.helpmybattery.R;
@@ -20,7 +19,6 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
     Preference preferenceSwitch;
     Preference preferenceAutoDiscount;
     Preference preferenceToggle;
-    LocalBroadcastManager localBroadcastManager;
     TestReceiver receiver;
 
 
@@ -35,8 +33,8 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         IntentFilter filter = new IntentFilter();
         filter.addAction(TEST_ACTION);
         receiver = new TestReceiver();
-        localBroadcastManager = LocalBroadcastManager.getInstance(getActivity());
-        localBroadcastManager.registerReceiver(receiver, filter);
+        getActivity().registerReceiver(receiver, filter);
+
 
     }
 
@@ -60,7 +58,7 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         if (preference == preferenceTest) {
             try {
                 Intent intent = new Intent(TEST_ACTION);
-                localBroadcastManager.sendBroadcast(intent);
+                getActivity().sendBroadcast(intent);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -78,6 +76,6 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
     @Override
     public void onDestroy() {
         super.onDestroy();
-        localBroadcastManager.unregisterReceiver(receiver);
+        getActivity().unregisterReceiver(receiver);
     }
 }

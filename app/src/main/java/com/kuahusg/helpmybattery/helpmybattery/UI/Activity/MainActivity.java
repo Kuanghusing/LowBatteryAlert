@@ -1,8 +1,8 @@
 package com.kuahusg.helpmybattery.helpmybattery.UI.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -11,7 +11,7 @@ import com.kuahusg.helpmybattery.helpmybattery.R;
 import com.kuahusg.helpmybattery.helpmybattery.UI.Fragment.LowBatteryProgressDialog;
 import com.kuahusg.helpmybattery.helpmybattery.Util.NetworkUtil;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
     Button btnToggleMobileData;
     Button btnShowDialog;
     Button btnOpenSetting;

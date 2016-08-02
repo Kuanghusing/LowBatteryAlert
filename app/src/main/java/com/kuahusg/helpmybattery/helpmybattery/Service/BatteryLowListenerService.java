@@ -6,7 +6,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 
 import com.kuahusg.helpmybattery.helpmybattery.R;
 import com.kuahusg.helpmybattery.helpmybattery.Receiver.BatteryLowReceiver;
@@ -18,7 +17,6 @@ import com.kuahusg.helpmybattery.helpmybattery.Util.NotificationTest;
 public class BatteryLowListenerService extends Service {
     private static BatteryLowReceiver receiver;
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;

@@ -2,7 +2,6 @@ package com.kuahusg.helpmybattery.helpmybattery.UI.Fragment;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
@@ -24,7 +23,6 @@ import java.io.InputStreamReader;
  */
 public class AboutDialogFragment extends DialogFragment {
     StringBuilder aboutText;
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
