@@ -10,12 +10,11 @@ import android.widget.Toast;
 
 import com.kuahusg.helpmybattery.helpmybattery.R;
 import com.kuahusg.helpmybattery.helpmybattery.Receiver.TestReceiver;
-import com.kuahusg.helpmybattery.helpmybattery.Util.ReceiverUtil;
 
 /**
  * Created by kuahusg on 16-8-1.
  */
-public class SettingFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener ,Preference.OnPreferenceChangeListener{
+public class SettingFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
     Preference preferenceTest;
     Preference preferenceAbout;
     Preference preferenceSwitch;
@@ -47,13 +46,13 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         preferenceAbout = findPreference(getString(R.string.about));
         preferenceAbout.setOnPreferenceClickListener(this);
 
-        preferenceSwitch = findPreference(getString(R.string.switch_open_close));
+        /*preferenceSwitch = findPreference(getString(R.string.switch_open_close));
         preferenceAutoDiscount = findPreference(getString(R.string.auto_disconnect));
         preferenceToggle = findPreference(getString(R.string.battery_level));
 
         preferenceSwitch.setOnPreferenceChangeListener(this);
         preferenceAutoDiscount.setOnPreferenceChangeListener(this);
-        preferenceToggle.setOnPreferenceChangeListener(this);
+        preferenceToggle.setOnPreferenceChangeListener(this);*/
     }
 
     @Override
@@ -75,16 +74,6 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         return false;
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object o) {
-        if (preference == preferenceSwitch) {
-            ReceiverUtil.getInstance(getActivity()).registerReceiver(getActivity());
-        } else if (preference == preferenceAutoDiscount || preference == preferenceToggle) {
-            ReceiverUtil.getInstance(getActivity()).unregisterReceiver(getActivity());
-            ReceiverUtil.getInstance(getActivity()).registerReceiver(getActivity());
-        }
-        return true;
-    }
 
     @Override
     public void onDestroy() {

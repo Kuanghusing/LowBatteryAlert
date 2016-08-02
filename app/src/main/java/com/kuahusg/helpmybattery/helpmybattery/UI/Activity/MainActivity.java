@@ -1,15 +1,13 @@
 package com.kuahusg.helpmybattery.helpmybattery.UI.Activity;
 
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.kuahusg.helpmybattery.helpmybattery.R;
-import com.kuahusg.helpmybattery.helpmybattery.Receiver.BatteryStatusReceiver;
 import com.kuahusg.helpmybattery.helpmybattery.UI.Fragment.LowBatteryProgressDialog;
 import com.kuahusg.helpmybattery.helpmybattery.Util.NetworkUtil;
 
@@ -29,6 +27,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnShowDialog.setOnClickListener(this);
         btnOpenSetting = (Button) findViewById(R.id.btn_setting);
         btnOpenSetting.setOnClickListener(this);
+
+
+        /**
+         * test start a service
+         */
+/*        NotificationTest.showNotification(0, "MainActivity", this);
+        Intent intent = new Intent(MainActivity.this, BatteryLowListenerService.class);
+        startService(intent);*/
 
 
     }

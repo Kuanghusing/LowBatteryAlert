@@ -17,7 +17,16 @@ public class BatteryLowReceiver extends BroadcastReceiver {
     private String level;
     private int second;
     private boolean autoDiscount;
+    private static LowBatteryProgressDialog dialog = null;
 
+
+    /**
+     * this receiver can't register in manifest
+     *
+     * @param level
+     * @param second
+     * @param autoDiscount
+     */
     public BatteryLowReceiver(String level, int second, boolean autoDiscount) {
         this.level = level;
         this.second = second;
@@ -29,21 +38,41 @@ public class BatteryLowReceiver extends BroadcastReceiver {
         float toggle_level = Float.parseFloat(this.level);
         int level_now = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float level_percent = level_now / (float) scale * 100;
+        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING;
 
-        float level_percent = level_now / (float) scale;
-        if (level_percent <= toggle_level) {
+
+        /**
+         * test notification
+         */
+
+//        NotificationTest.showNotification(0, "BatteryLowReceiver: " + level_percent, context);
+
+        if (level_percent == toggle_level && !isCharging) {
+            /**
+             * need to disconnect the network?
+             */
             if (autoDiscount) {
                 NetworkUtil.getNetWorkUtil(context).toggleWifi(false);
                 NetworkUtil.getNetWorkUtil(context).toggleMobileData(false);
             }
-            LowBatteryProgressDialog dialog = new LowBatteryProgressDialog(context, second);
-
-
+            /**
+             * show the alert dialog
+             */
+            if (dialog == null) {
+                dialog = new LowBatteryProgressDialog(context, second);
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_TOAST);
             else
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG);
-            dialog.show();
+            if (!dialog.isShowing())
+                dialog.show();
+        } else if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
         }
     }
+
+
 }

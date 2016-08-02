@@ -3,29 +3,29 @@ package com.kuahusg.helpmybattery.helpmybattery.Receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.BatteryManager;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.kuahusg.helpmybattery.helpmybattery.Util.ReceiverUtil;
+import com.kuahusg.helpmybattery.helpmybattery.R;
+import com.kuahusg.helpmybattery.helpmybattery.Service.BatteryLowListenerService;
 
 /**
  * Created by kuahusg on 16-8-1.
  */
 public class BatteryStatusReceiver extends BroadcastReceiver {
     public static final String TAG = "BatteryStatusReceiver";
-    private String level;
-    private boolean autoDiscount;
-    private int second;
+    private static BatteryLowReceiver receiver;
+    private static Intent intent1;
 
-    public BatteryStatusReceiver(boolean autoDiscount, String level, int second) {
-        this.autoDiscount = autoDiscount;
-        this.level = level;
-        this.second = second;
+    public BatteryStatusReceiver() {
     }
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         Log.v(TAG, "onReceive()");
         int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
@@ -35,15 +35,25 @@ public class BatteryStatusReceiver extends BroadcastReceiver {
         Log.v(TAG, "percent:" + level / scale * 100 + "%");
 
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        BatteryLowReceiver receiver = new BatteryLowReceiver(this.level, second, autoDiscount);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean enable = preferences.getBoolean(context.getString(R.string.switch_open_close), false);
 
-        if (intent.getAction().equals(Intent.ACTION_BATTERY_LOW)) {
-            context.registerReceiver(receiver, filter);
-        } else {
-            ReceiverUtil.getInstance(context).unregisterReceiver(context, receiver);
-
+        if (intent1 == null) {
+            intent1 = new Intent(context, BatteryLowListenerService.class);
+        }
+        if (enable) {
+            if (intent.getAction().equals(Intent.ACTION_BATTERY_LOW)) {
+                /**
+                 * if battery level is low, then start a service ,in order to start a receiver(battery_change) by service
+                 */
+                context.getApplicationContext().startService(intent1);
+            } else if (intent.getAction().equals(Intent.ACTION_BATTERY_OKAY)) {
+                /**
+                 * stop the service if battery level is ok
+                 */
+                context.getApplicationContext().stopService(intent1);
+                intent1 = null;
+            }
         }
     }
 }

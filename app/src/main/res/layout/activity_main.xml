@@ -31,4 +31,5 @@
         android:layout_centerHorizontal="true"
         android:text="open setting"/>
 
+
 </RelativeLayout>
