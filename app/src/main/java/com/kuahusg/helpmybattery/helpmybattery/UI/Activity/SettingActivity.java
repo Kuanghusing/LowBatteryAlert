@@ -2,6 +2,7 @@ package com.kuahusg.helpmybattery.helpmybattery.UI.Activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.kuahusg.helpmybattery.helpmybattery.R;
@@ -27,7 +28,9 @@ public class SettingActivity extends Activity {
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher);
+            }
         }
     }
 

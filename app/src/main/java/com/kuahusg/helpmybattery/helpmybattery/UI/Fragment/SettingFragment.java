@@ -13,7 +13,7 @@ import com.kuahusg.helpmybattery.helpmybattery.Receiver.TestReceiver;
 /**
  * Created by kuahusg on 16-8-1.
  */
-public class SettingFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+public class SettingFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
     Preference preferenceTest;
     Preference preferenceAbout;
     Preference preferenceSwitch;
@@ -44,11 +44,11 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         preferenceAbout = findPreference(getString(R.string.about));
         preferenceAbout.setOnPreferenceClickListener(this);
 
-        /*preferenceSwitch = findPreference(getString(R.string.switch_open_close));
+        preferenceSwitch = findPreference(getString(R.string.switch_open_close));
         preferenceAutoDiscount = findPreference(getString(R.string.auto_disconnect));
         preferenceToggle = findPreference(getString(R.string.battery_level));
-
         preferenceSwitch.setOnPreferenceChangeListener(this);
+/*        preferenceSwitch.setOnPreferenceChangeListener(this);
         preferenceAutoDiscount.setOnPreferenceChangeListener(this);
         preferenceToggle.setOnPreferenceChangeListener(this);*/
     }
@@ -72,6 +72,15 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         return false;
     }
 
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object o) {
+        if (preference == preferenceSwitch) {
+            preferenceAutoDiscount.setEnabled((boolean) o);
+            preferenceToggle.setEnabled((boolean) o);
+
+        }
+        return true;
+    }
 
     @Override
     public void onDestroy() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/app_name">
+    <PreferenceCategory android:title="@string/setting">
 
         <SwitchPreference
             android:defaultValue="true"
@@ -17,7 +17,7 @@
 
 
         <ListPreference
-            android:defaultValue="2"
+            android:defaultValue="1"
             android:entries="@array/level_entries"
             android:entryValues="@array/level_entries_values"
             android:icon="@drawable/ic_battery_alert_black_24dp"

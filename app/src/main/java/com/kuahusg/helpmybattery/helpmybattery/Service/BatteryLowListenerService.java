@@ -9,7 +9,6 @@ import android.preference.PreferenceManager;
 
 import com.kuahusg.helpmybattery.helpmybattery.R;
 import com.kuahusg.helpmybattery.helpmybattery.Receiver.BatteryLowReceiver;
-import com.kuahusg.helpmybattery.helpmybattery.Util.NotificationTest;
 
 /**
  * Created by kuahusg on 16-8-1.
@@ -54,7 +53,7 @@ public class BatteryLowListenerService extends Service {
 
     @Override
     public void onDestroy() {
-        NotificationTest.showNotification(5, "Service onDestroy", this);
+//        NotificationTest.showNotification(5, "Service onDestroy", this);
         if (receiver != null) {
             unregisterReceiver(receiver);
             receiver = null;
