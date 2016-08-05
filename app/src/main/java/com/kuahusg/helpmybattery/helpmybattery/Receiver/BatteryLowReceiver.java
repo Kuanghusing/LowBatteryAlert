@@ -7,6 +7,7 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.view.WindowManager;
 
+import com.kuahusg.helpmybattery.helpmybattery.Interface.OnFinishListener;
 import com.kuahusg.helpmybattery.helpmybattery.UI.Fragment.LowBatteryProgressDialog;
 import com.kuahusg.helpmybattery.helpmybattery.Util.NetworkUtil;
 
@@ -17,7 +18,8 @@ public class BatteryLowReceiver extends BroadcastReceiver {
     private String level;
     private int second;
     private boolean autoDiscount;
-    private static LowBatteryProgressDialog dialog = null;
+    private LowBatteryProgressDialog dialog = null;
+    private OnFinishListener listener;
 
 
     /**
@@ -27,10 +29,11 @@ public class BatteryLowReceiver extends BroadcastReceiver {
      * @param second
      * @param autoDiscount
      */
-    public BatteryLowReceiver(String level, int second, boolean autoDiscount) {
+    public BatteryLowReceiver(String level, int second, boolean autoDiscount, OnFinishListener listener) {
         this.level = level;
         this.second = second;
         this.autoDiscount = autoDiscount;
+        this.listener = listener;
     }
 
     @Override
@@ -43,6 +46,12 @@ public class BatteryLowReceiver extends BroadcastReceiver {
         boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING;
 
 
+        if (intent.getAction().equals(Intent.ACTION_POWER_CONNECTED)) {
+            if (listener != null) {
+                listener.finish();
+            }
+            return;
+        }
         /**
          * test notification
          */

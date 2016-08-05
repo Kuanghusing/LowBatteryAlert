@@ -86,5 +86,6 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
     public void onDestroy() {
         super.onDestroy();
         getActivity().unregisterReceiver(receiver);
+        receiver = null;
     }
 }

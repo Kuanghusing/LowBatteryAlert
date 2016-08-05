@@ -17,7 +17,7 @@ import com.kuahusg.helpmybattery.helpmybattery.Service.BatteryLowListenerService
 public class BatteryStatusReceiver extends BroadcastReceiver {
     public static final String TAG = "BatteryStatusReceiver";
     private static BatteryLowReceiver receiver;
-    private static Intent intent1;
+    private Intent intent1;
 
     public BatteryStatusReceiver() {
     }
@@ -51,7 +51,7 @@ public class BatteryStatusReceiver extends BroadcastReceiver {
                 /**
                  * stop the service if battery level is ok
                  */
-                context.getApplicationContext().stopService(intent1);
+//                context.getApplicationContext().stopService(intent1);
                 intent1 = null;
             }
         }
